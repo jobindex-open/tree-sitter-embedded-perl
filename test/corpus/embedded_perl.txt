@@ -187,3 +187,219 @@ trailing close tag text
       (tag_close))
     (non_directive_text)
     (newline)))
+
+==================
+empty file
+==================
+
+---
+
+(source_file)
+
+==================
+blank line
+==================
+
+
+---
+
+(source_file
+  (newline))
+
+==================
+whitespace-only line
+==================
+  	
+
+---
+
+(source_file
+  (whitespace_line
+    (line_indent)
+    (newline)))
+
+==================
+bare line directives
+==================
+%
+%=
+%==
+%#
+%%
+
+---
+
+(source_file
+  (directive_line
+    (line_code)
+    (newline))
+  (directive_line
+    (line_expression)
+    (newline))
+  (directive_line
+    (line_raw_expression)
+    (newline))
+  (directive_line
+    (line_comment)
+    (newline))
+  (directive_line
+    (line_escaped_percent)
+    (newline)))
+
+==================
+content without trailing newline
+==================
+hello
+---
+
+(source_file
+  (content_line
+    (non_directive_text)))
+
+==================
+directive without trailing newline
+==================
+% my $x
+---
+
+(source_file
+  (directive_line
+    (line_code
+      (line_content))))
+
+==================
+multiple tags on one line
+==================
+<%= $a %><%= $b %>
+<%= $x %>text<%= $y %>
+<%= $a %> <%= $b %>
+
+---
+
+(source_file
+  (content_line
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (newline))
+  (content_line
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (non_directive_text)
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (newline))
+  (content_line
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (text)
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (newline)))
+
+==================
+bare < in content
+==================
+<
+a < b
+
+---
+
+(source_file
+  (content_line
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline)))
+
+==================
+tag content with percent
+==================
+<% 100%50 %>
+
+---
+
+(source_file
+  (content_line
+    (code_tag
+      (tag_content)
+      (tag_close))
+    (newline)))
+
+==================
+escaped open tags in content
+==================
+foo<%%bar
+<%%<%%
+<%%>text
+
+---
+
+(source_file
+  (content_line
+    (non_directive_text)
+    (escaped_open_tag)
+    (non_directive_text)
+    (newline))
+  (content_line
+    (escaped_open_tag)
+    (escaped_open_tag)
+    (newline))
+  (content_line
+    (escaped_open_tag)
+    (non_directive_text)
+    (newline)))
+
+==================
+mixed tag types on one line
+==================
+<% if ($x) { %><%= $x %><% } %>
+
+---
+
+(source_file
+  (content_line
+    (code_tag
+      (tag_content)
+      (tag_close))
+    (expression_tag
+      (tag_content)
+      (tag_close))
+    (code_tag
+      (tag_content)
+      (tag_close))
+    (newline)))
+
+==================
+consecutive directive lines
+==================
+%# setup
+% my $x = 1;
+% my $y = 2;
+hello
+
+---
+
+(source_file
+  (directive_line
+    (line_comment
+      (line_content))
+    (newline))
+  (directive_line
+    (line_code
+      (line_content))
+    (newline))
+  (directive_line
+    (line_code
+      (line_content))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline)))
