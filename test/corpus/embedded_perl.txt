@@ -18,66 +18,58 @@ content
 
 (source_file
   (content_line
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (content_line
     (line_indent)
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
     (non_directive_text)
-    (tag
-      (expression_tag
-        (tag_content)
-        (tag_close)))
+    (expression_tag
+      (tag_content)
+      (tag_close))
     (non_directive_text)
     (newline))
   (content_line
     (line_indent)
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (content_line
-    (tag
-      (raw_expression_tag
-        (tag_content)
-        (tag_close)))
+    (raw_expression_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
-    (tag
-      (comment_tag
-        (tag_content)
-        (tag_close)))
+    (comment_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
     (escaped_open_tag)
     (newline))
   (directive_line
-    (line_statement
-      (line_code
-        (line_content)))
+    (line_code
+      (line_content))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (directive_line
-    (line_statement
-      (line_code
-        (line_content)))
+    (line_code
+      (line_content))
     (newline)))
 
 ==================
@@ -99,54 +91,47 @@ line directives
 
 (source_file
   (directive_line
-    (line_statement
-      (line_code
-        (line_content)))
+    (line_code
+      (line_content))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (directive_line
     (line_indent)
-    (line_statement
-      (line_code
-        (line_content)))
+    (line_code
+      (line_content))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (directive_line
     (line_indent)
-    (line_statement
-      (line_expression
-        (line_content)))
+    (line_expression
+      (line_content))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (directive_line
     (line_indent)
-    (line_statement
-      (line_code
-        (line_content)))
+    (line_code
+      (line_content))
     (newline))
   (content_line
     (non_directive_text)
     (newline))
   (directive_line
-    (line_statement
-      (line_escaped_percent
-        (line_content)))
+    (line_escaped_percent
+      (line_content))
     (newline))
   (directive_line
-    (line_statement
-      (line_comment
-        (line_content)))
+    (line_comment
+      (line_content))
     (newline))
   (directive_line
-    (line_statement
-      (line_raw_expression
-        (line_content)))
+    (line_raw_expression
+      (line_content))
     (newline)))
 
 ==================
@@ -160,23 +145,20 @@ trimmed tag endings
 
 (source_file
   (content_line
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
     (line_indent)
-    (tag
-      (expression_tag
-        (tag_content)
-        (tag_close)))
+    (expression_tag
+      (tag_content)
+      (tag_close))
     (newline))
   (content_line
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (newline)))
 
 ==================
@@ -200,9 +182,8 @@ trailing close tag text
 
 (source_file
   (content_line
-    (tag
-      (code_tag
-        (tag_content)
-        (tag_close)))
+    (code_tag
+      (tag_content)
+      (tag_close))
     (non_directive_text)
     (newline)))

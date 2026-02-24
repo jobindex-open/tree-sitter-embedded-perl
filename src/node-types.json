@@ -57,10 +57,22 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
+          "type": "code_tag",
+          "named": true
+        },
+        {
+          "type": "comment_tag",
+          "named": true
+        },
+        {
           "type": "escaped_open_tag",
+          "named": true
+        },
+        {
+          "type": "expression_tag",
           "named": true
         },
         {
@@ -76,7 +88,7 @@
           "named": true
         },
         {
-          "type": "tag",
+          "type": "raw_expression_tag",
           "named": true
         },
         {
@@ -95,11 +107,27 @@
       "required": true,
       "types": [
         {
+          "type": "line_code",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "line_escaped_percent",
+          "named": true
+        },
+        {
+          "type": "line_expression",
+          "named": true
+        },
+        {
           "type": "line_indent",
           "named": true
         },
         {
-          "type": "line_statement",
+          "type": "line_raw_expression",
           "named": true
         },
         {
@@ -130,56 +158,6 @@
       "types": [
         {
           "type": "tag_close",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "final_content_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escaped_open_tag",
-          "named": true
-        },
-        {
-          "type": "line_indent",
-          "named": true
-        },
-        {
-          "type": "non_directive_text",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "final_directive_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "line_indent",
-          "named": true
-        },
-        {
-          "type": "line_statement",
           "named": true
         }
       ]
@@ -266,37 +244,6 @@
     }
   },
   {
-    "type": "line_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "line_code",
-          "named": true
-        },
-        {
-          "type": "line_comment",
-          "named": true
-        },
-        {
-          "type": "line_escaped_percent",
-          "named": true
-        },
-        {
-          "type": "line_expression",
-          "named": true
-        },
-        {
-          "type": "line_raw_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "raw_expression_tag",
     "named": true,
     "fields": {
@@ -340,14 +287,6 @@
           "named": true
         },
         {
-          "type": "final_content_line",
-          "named": true
-        },
-        {
-          "type": "final_directive_line",
-          "named": true
-        },
-        {
           "type": "line_indent",
           "named": true
         },
@@ -363,39 +302,7 @@
     }
   },
   {
-    "type": "tag",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "code_tag",
-          "named": true
-        },
-        {
-          "type": "comment_tag",
-          "named": true
-        },
-        {
-          "type": "expression_tag",
-          "named": true
-        },
-        {
-          "type": "raw_expression_tag",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "tag_close",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "tag_content",
     "named": true,
     "fields": {}
   },
@@ -484,6 +391,10 @@
   },
   {
     "type": "non_directive_text",
+    "named": true
+  },
+  {
+    "type": "tag_content",
     "named": true
   },
   {

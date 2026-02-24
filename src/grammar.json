@@ -36,12 +36,22 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "final_directive_line"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_final_directive_line"
+                  },
+                  "named": true,
+                  "value": "directive_line"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "final_content_line"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_final_content_line"
+                  },
+                  "named": true,
+                  "value": "content_line"
                 },
                 {
                   "type": "SYMBOL",
@@ -76,7 +86,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "line_statement"
+            "name": "_line_statement"
           },
           {
             "type": "SYMBOL",
@@ -85,7 +95,7 @@
         ]
       }
     },
-    "final_directive_line": {
+    "_final_directive_line": {
       "type": "PREC",
       "value": 2,
       "content": {
@@ -105,12 +115,12 @@
           },
           {
             "type": "SYMBOL",
-            "name": "line_statement"
+            "name": "_line_statement"
           }
         ]
       }
     },
-    "line_statement": {
+    "_line_statement": {
       "type": "CHOICE",
       "members": [
         {
@@ -284,7 +294,7 @@
         ]
       }
     },
-    "final_content_line": {
+    "_final_content_line": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -344,7 +354,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "tag"
+                  "name": "_tag"
                 },
                 {
                   "type": "SYMBOL",
@@ -365,7 +375,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "tag"
+          "name": "_tag"
         },
         {
           "type": "SYMBOL",
@@ -385,7 +395,7 @@
         }
       ]
     },
-    "tag": {
+    "_tag": {
       "type": "CHOICE",
       "members": [
         {
@@ -527,33 +537,14 @@
       "value": "<%%"
     },
     "tag_content": {
-      "type": "REPEAT1",
+      "type": "TOKEN",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[^%]+"
-              }
-            }
-          },
-          {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "%[^>]"
-              }
-            }
-          }
-        ]
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "([^%]|%[^>])+"
+        }
       }
     },
     "tag_close": {

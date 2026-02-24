@@ -7,6 +7,12 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const line_directive = (prefix, fieldName) =>
+  $ => seq(prefix, optional(field(fieldName, $.line_content)));
+
+const tag_rule = (prefix, fieldName) =>
+  $ => seq(prefix, optional(field(fieldName, $.tag_content)), $.tag_close);
+
 module.exports = grammar({
   name: "embedded_perl",
 
@@ -15,21 +21,25 @@ module.exports = grammar({
   rules: {
     source_file: $ => seq(
       repeat(choice($.directive_line, $.content_line, $.whitespace_line, $.newline)),
-      optional(choice($.final_directive_line, $.final_content_line, $.line_indent))
+      optional(choice(
+        alias($._final_directive_line, $.directive_line),
+        alias($._final_content_line, $.content_line),
+        $.line_indent
+      ))
     ),
 
     directive_line: $ => prec(2, seq(
       optional($.line_indent),
-      $.line_statement,
+      $._line_statement,
       $.newline
     )),
 
-    final_directive_line: $ => prec(2, seq(
+    _final_directive_line: $ => prec(2, seq(
       optional($.line_indent),
-      $.line_statement
+      $._line_statement
     )),
 
-    line_statement: $ => choice(
+    _line_statement: $ => choice(
       $.line_raw_expression,
       $.line_expression,
       $.line_comment,
@@ -37,11 +47,11 @@ module.exports = grammar({
       $.line_code
     ),
 
-    line_raw_expression: $ => seq("%==", optional(field("code", $.line_content))),
-    line_expression: $ => seq("%=", optional(field("code", $.line_content))),
-    line_comment: $ => seq("%#", optional(field("text", $.line_content))),
-    line_escaped_percent: $ => seq("%%", optional(field("text", $.line_content))),
-    line_code: $ => seq("%", optional(field("code", $.line_content))),
+    line_raw_expression: line_directive("%==", "code"),
+    line_expression: line_directive("%=", "code"),
+    line_comment: line_directive("%#", "text"),
+    line_escaped_percent: line_directive("%%", "text"),
+    line_code: line_directive("%", "code"),
 
     content_line: $ => prec(1, seq(
       $._content_start,
@@ -49,35 +59,32 @@ module.exports = grammar({
       $.newline
     )),
 
-    final_content_line: $ => prec(1, seq($._content_start, repeat($._content_piece))),
+    _final_content_line: $ => prec(1, seq($._content_start, repeat($._content_piece))),
 
     whitespace_line: $ => seq($.line_indent, $.newline),
 
     _content_start: $ => choice(
       $.non_directive_text,
-      seq(optional($.line_indent), choice($.tag, $.escaped_open_tag, "<"))
+      seq(optional($.line_indent), choice($._tag, $.escaped_open_tag, "<"))
     ),
 
-    _content_piece: $ => choice($.tag, $.escaped_open_tag, $.non_directive_text, $.text, "<"),
+    _content_piece: $ => choice($._tag, $.escaped_open_tag, $.non_directive_text, $.text, "<"),
 
-    tag: $ => choice(
+    _tag: $ => choice(
       $.raw_expression_tag,
       $.expression_tag,
       $.comment_tag,
       $.code_tag
     ),
 
-    raw_expression_tag: $ => seq("<%==", optional(field("code", $.tag_content)), $.tag_close),
-    expression_tag: $ => seq("<%=", optional(field("code", $.tag_content)), $.tag_close),
-    comment_tag: $ => seq("<%#", optional(field("text", $.tag_content)), $.tag_close),
-    code_tag: $ => seq("<%", optional(field("code", $.tag_content)), $.tag_close),
+    raw_expression_tag: tag_rule("<%==", "code"),
+    expression_tag: tag_rule("<%=", "code"),
+    comment_tag: tag_rule("<%#", "text"),
+    code_tag: tag_rule("<%", "code"),
 
     escaped_open_tag: _ => "<%%",
 
-    tag_content: _ => repeat1(choice(
-      token(prec(1, /[^%]+/)),
-      token(prec(1, /%[^>]/))
-    )),
+    tag_content: _ => token(prec(1, /([^%]|%[^>])+/)),
 
     tag_close: _ => seq(optional("="), "%>"),
 
