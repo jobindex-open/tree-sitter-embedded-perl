@@ -422,213 +422,223 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   eof = lexer->eof(lexer);
   switch (state) {
     case 0:
-      if (eof) ADVANCE(13);
+      if (eof) ADVANCE(14);
       ADVANCE_MAP(
-        '\n', 36,
+        '\n', 38,
         '\r', 1,
-        '%', 31,
-        '<', 20,
-        '=', 35,
-        '\t', 34,
-        ' ', 34,
-        0x0b, 33,
-        '\f', 33,
+        '%', 33,
+        '<', 21,
+        '=', 37,
+        '\t', 36,
+        ' ', 36,
+        0x0b, 35,
+        '\f', 35,
       );
-      if (lookahead != 0) ADVANCE(35);
+      if (lookahead != 0) ADVANCE(37);
       END_STATE();
     case 1:
-      if (lookahead == '\n') ADVANCE(36);
+      if (lookahead == '\n') ADVANCE(38);
       END_STATE();
     case 2:
-      if (lookahead == '%') ADVANCE(5);
-      if (lookahead == '=') ADVANCE(26);
-      if (lookahead != 0) ADVANCE(26);
+      if (lookahead == '%') ADVANCE(6);
+      if (lookahead == '=') ADVANCE(29);
+      if (lookahead != 0) ADVANCE(27);
       END_STATE();
     case 3:
-      if (lookahead == '%') ADVANCE(4);
-      if (lookahead == '=') ADVANCE(27);
+      if (lookahead == '%') ADVANCE(9);
+      if (lookahead != 0) ADVANCE(27);
       END_STATE();
     case 4:
-      if (lookahead == '>') ADVANCE(28);
+      if (lookahead == '%') ADVANCE(5);
+      if (lookahead == '=') ADVANCE(28);
       END_STATE();
     case 5:
-      if (lookahead == '>') ADVANCE(28);
-      if (lookahead != 0) ADVANCE(26);
+      if (lookahead == '>') ADVANCE(30);
       END_STATE();
     case 6:
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r' &&
-          lookahead != '%') ADVANCE(35);
+      if (lookahead == '>') ADVANCE(30);
+      if (lookahead != 0) ADVANCE(27);
       END_STATE();
     case 7:
       if (lookahead != 0 &&
           lookahead != '\n' &&
           lookahead != '\r' &&
-          lookahead != '%') ADVANCE(33);
+          lookahead != '%') ADVANCE(37);
       END_STATE();
     case 8:
       if (lookahead != 0 &&
-          lookahead != '>') ADVANCE(26);
+          lookahead != '\n' &&
+          lookahead != '\r' &&
+          lookahead != '%') ADVANCE(35);
       END_STATE();
     case 9:
-      if (eof) ADVANCE(13);
-      if (lookahead == '\n') ADVANCE(36);
-      if (lookahead == '\r') ADVANCE(1);
-      if (lookahead == '%') ADVANCE(18);
-      if (lookahead == '<') ADVANCE(20);
-      if (lookahead == '\t' ||
-          lookahead == ' ') ADVANCE(29);
       if (lookahead != 0 &&
-          (lookahead < '\t' || '\r' < lookahead)) ADVANCE(35);
+          lookahead != '>') ADVANCE(27);
       END_STATE();
     case 10:
-      if (eof) ADVANCE(13);
-      if (lookahead == '\n') ADVANCE(36);
+      if (eof) ADVANCE(14);
+      if (lookahead == '\n') ADVANCE(38);
       if (lookahead == '\r') ADVANCE(1);
-      if (lookahead == '%') ADVANCE(18);
-      if (lookahead == '<') ADVANCE(19);
+      if (lookahead == '%') ADVANCE(19);
+      if (lookahead == '<') ADVANCE(21);
+      if (lookahead == '\t' ||
+          lookahead == ' ') ADVANCE(31);
+      if (lookahead != 0 &&
+          (lookahead < '\t' || '\r' < lookahead)) ADVANCE(37);
       END_STATE();
     case 11:
-      if (eof) ADVANCE(13);
-      if (lookahead == '\n') ADVANCE(36);
+      if (eof) ADVANCE(14);
+      if (lookahead == '\n') ADVANCE(38);
       if (lookahead == '\r') ADVANCE(1);
+      if (lookahead == '%') ADVANCE(19);
       if (lookahead == '<') ADVANCE(20);
-      if (lookahead == '\t' ||
-          lookahead == ' ') ADVANCE(34);
-      if (lookahead == 0x0b ||
-          lookahead == '\f' ||
-          lookahead == '%') ADVANCE(33);
-      if (lookahead != 0) ADVANCE(35);
       END_STATE();
     case 12:
-      if (eof) ADVANCE(13);
-      if (lookahead == '\n') ADVANCE(36);
+      if (eof) ADVANCE(14);
+      if (lookahead == '\n') ADVANCE(38);
       if (lookahead == '\r') ADVANCE(1);
-      if (lookahead != 0) ADVANCE(30);
+      if (lookahead == '<') ADVANCE(21);
+      if (lookahead == '\t' ||
+          lookahead == ' ') ADVANCE(36);
+      if (lookahead == 0x0b ||
+          lookahead == '\f' ||
+          lookahead == '%') ADVANCE(35);
+      if (lookahead != 0) ADVANCE(37);
       END_STATE();
     case 13:
-      ACCEPT_TOKEN(ts_builtin_sym_end);
+      if (eof) ADVANCE(14);
+      if (lookahead == '\n') ADVANCE(38);
+      if (lookahead == '\r') ADVANCE(1);
+      if (lookahead != 0) ADVANCE(32);
       END_STATE();
     case 14:
-      ACCEPT_TOKEN(anon_sym_PERCENT_EQ_EQ);
+      ACCEPT_TOKEN(ts_builtin_sym_end);
       END_STATE();
     case 15:
-      ACCEPT_TOKEN(anon_sym_PERCENT_EQ);
-      if (lookahead == '=') ADVANCE(14);
+      ACCEPT_TOKEN(anon_sym_PERCENT_EQ_EQ);
       END_STATE();
     case 16:
-      ACCEPT_TOKEN(anon_sym_PERCENT_POUND);
-      END_STATE();
-    case 17:
-      ACCEPT_TOKEN(anon_sym_PERCENT_PERCENT);
-      END_STATE();
-    case 18:
-      ACCEPT_TOKEN(anon_sym_PERCENT);
-      if (lookahead == '#') ADVANCE(16);
-      if (lookahead == '%') ADVANCE(17);
+      ACCEPT_TOKEN(anon_sym_PERCENT_EQ);
       if (lookahead == '=') ADVANCE(15);
       END_STATE();
+    case 17:
+      ACCEPT_TOKEN(anon_sym_PERCENT_POUND);
+      END_STATE();
+    case 18:
+      ACCEPT_TOKEN(anon_sym_PERCENT_PERCENT);
+      END_STATE();
     case 19:
-      ACCEPT_TOKEN(anon_sym_LT);
-      if (lookahead == '%') ADVANCE(24);
+      ACCEPT_TOKEN(anon_sym_PERCENT);
+      if (lookahead == '#') ADVANCE(17);
+      if (lookahead == '%') ADVANCE(18);
+      if (lookahead == '=') ADVANCE(16);
       END_STATE();
     case 20:
       ACCEPT_TOKEN(anon_sym_LT);
-      if (lookahead == '%') ADVANCE(24);
+      if (lookahead == '%') ADVANCE(25);
+      END_STATE();
+    case 21:
+      ACCEPT_TOKEN(anon_sym_LT);
+      if (lookahead == '%') ADVANCE(25);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(37);
+      END_STATE();
+    case 22:
+      ACCEPT_TOKEN(anon_sym_LT_PERCENT_EQ_EQ);
+      END_STATE();
+    case 23:
+      ACCEPT_TOKEN(anon_sym_LT_PERCENT_EQ);
+      if (lookahead == '=') ADVANCE(22);
+      END_STATE();
+    case 24:
+      ACCEPT_TOKEN(anon_sym_LT_PERCENT_POUND);
+      END_STATE();
+    case 25:
+      ACCEPT_TOKEN(anon_sym_LT_PERCENT);
+      if (lookahead == '#') ADVANCE(24);
+      if (lookahead == '%') ADVANCE(26);
+      if (lookahead == '=') ADVANCE(23);
+      END_STATE();
+    case 26:
+      ACCEPT_TOKEN(sym_escaped_open_tag);
+      END_STATE();
+    case 27:
+      ACCEPT_TOKEN(sym_tag_content);
+      if (lookahead == '%') ADVANCE(9);
+      if (lookahead == '=') ADVANCE(3);
+      if (lookahead != 0) ADVANCE(27);
+      END_STATE();
+    case 28:
+      ACCEPT_TOKEN(anon_sym_EQ);
+      END_STATE();
+    case 29:
+      ACCEPT_TOKEN(anon_sym_EQ);
+      if (lookahead == '%') ADVANCE(9);
+      if (lookahead != 0) ADVANCE(27);
+      END_STATE();
+    case 30:
+      ACCEPT_TOKEN(anon_sym_PERCENT_GT);
+      END_STATE();
+    case 31:
+      ACCEPT_TOKEN(sym_line_indent);
+      if (lookahead == '<') ADVANCE(7);
+      if (lookahead == '\t' ||
+          lookahead == ' ') ADVANCE(31);
+      if (lookahead != 0 &&
+          (lookahead < '\t' || '\r' < lookahead) &&
+          lookahead != '%') ADVANCE(37);
+      END_STATE();
+    case 32:
+      ACCEPT_TOKEN(sym_line_content);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(32);
+      END_STATE();
+    case 33:
+      ACCEPT_TOKEN(sym_text);
+      if (lookahead == '#') ADVANCE(35);
+      if (lookahead == '%') ADVANCE(35);
+      if (lookahead == '<') ADVANCE(8);
+      if (lookahead == '=') ADVANCE(34);
       if (lookahead != 0 &&
           lookahead != '\n' &&
           lookahead != '\r') ADVANCE(35);
       END_STATE();
-    case 21:
-      ACCEPT_TOKEN(anon_sym_LT_PERCENT_EQ_EQ);
-      END_STATE();
-    case 22:
-      ACCEPT_TOKEN(anon_sym_LT_PERCENT_EQ);
-      if (lookahead == '=') ADVANCE(21);
-      END_STATE();
-    case 23:
-      ACCEPT_TOKEN(anon_sym_LT_PERCENT_POUND);
-      END_STATE();
-    case 24:
-      ACCEPT_TOKEN(anon_sym_LT_PERCENT);
-      if (lookahead == '#') ADVANCE(23);
-      if (lookahead == '%') ADVANCE(25);
-      if (lookahead == '=') ADVANCE(22);
-      END_STATE();
-    case 25:
-      ACCEPT_TOKEN(sym_escaped_open_tag);
-      END_STATE();
-    case 26:
-      ACCEPT_TOKEN(sym_tag_content);
-      if (lookahead == '%') ADVANCE(8);
-      if (lookahead != 0) ADVANCE(26);
-      END_STATE();
-    case 27:
-      ACCEPT_TOKEN(anon_sym_EQ);
-      END_STATE();
-    case 28:
-      ACCEPT_TOKEN(anon_sym_PERCENT_GT);
-      END_STATE();
-    case 29:
-      ACCEPT_TOKEN(sym_line_indent);
-      if (lookahead == '<') ADVANCE(6);
-      if (lookahead == '\t' ||
-          lookahead == ' ') ADVANCE(29);
-      if (lookahead != 0 &&
-          (lookahead < '\t' || '\r' < lookahead) &&
-          lookahead != '%') ADVANCE(35);
-      END_STATE();
-    case 30:
-      ACCEPT_TOKEN(sym_line_content);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(30);
-      END_STATE();
-    case 31:
-      ACCEPT_TOKEN(sym_text);
-      if (lookahead == '#') ADVANCE(33);
-      if (lookahead == '%') ADVANCE(33);
-      if (lookahead == '<') ADVANCE(7);
-      if (lookahead == '=') ADVANCE(32);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(33);
-      END_STATE();
-    case 32:
-      ACCEPT_TOKEN(sym_text);
-      if (lookahead == '<') ADVANCE(7);
-      if (lookahead == '=') ADVANCE(33);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(33);
-      END_STATE();
-    case 33:
-      ACCEPT_TOKEN(sym_text);
-      if (lookahead == '<') ADVANCE(7);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '\r') ADVANCE(33);
-      END_STATE();
     case 34:
       ACCEPT_TOKEN(sym_text);
-      if (lookahead == '<') ADVANCE(6);
-      if (lookahead == '\t' ||
-          lookahead == ' ') ADVANCE(34);
-      if (lookahead == 0x0b ||
-          lookahead == '\f' ||
-          lookahead == '%') ADVANCE(33);
+      if (lookahead == '<') ADVANCE(8);
+      if (lookahead == '=') ADVANCE(35);
       if (lookahead != 0 &&
-          (lookahead < '\t' || '\r' < lookahead)) ADVANCE(35);
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(35);
       END_STATE();
     case 35:
-      ACCEPT_TOKEN(sym_non_directive_text);
-      if (lookahead == '<') ADVANCE(6);
+      ACCEPT_TOKEN(sym_text);
+      if (lookahead == '<') ADVANCE(8);
       if (lookahead != 0 &&
           lookahead != '\n' &&
           lookahead != '\r') ADVANCE(35);
       END_STATE();
     case 36:
+      ACCEPT_TOKEN(sym_text);
+      if (lookahead == '<') ADVANCE(7);
+      if (lookahead == '\t' ||
+          lookahead == ' ') ADVANCE(36);
+      if (lookahead == 0x0b ||
+          lookahead == '\f' ||
+          lookahead == '%') ADVANCE(35);
+      if (lookahead != 0 &&
+          (lookahead < '\t' || '\r' < lookahead)) ADVANCE(37);
+      END_STATE();
+    case 37:
+      ACCEPT_TOKEN(sym_non_directive_text);
+      if (lookahead == '<') ADVANCE(7);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '\r') ADVANCE(37);
+      END_STATE();
+    case 38:
       ACCEPT_TOKEN(sym_newline);
       END_STATE();
     default:
@@ -638,46 +648,46 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
 
 static const TSLexerMode ts_lex_modes[STATE_COUNT] = {
   [0] = {.lex_state = 0},
-  [1] = {.lex_state = 9},
-  [2] = {.lex_state = 9},
-  [3] = {.lex_state = 9},
-  [4] = {.lex_state = 10},
-  [5] = {.lex_state = 10},
-  [6] = {.lex_state = 10},
-  [7] = {.lex_state = 11},
-  [8] = {.lex_state = 11},
-  [9] = {.lex_state = 11},
-  [10] = {.lex_state = 11},
-  [11] = {.lex_state = 11},
-  [12] = {.lex_state = 9},
-  [13] = {.lex_state = 9},
-  [14] = {.lex_state = 9},
-  [15] = {.lex_state = 9},
-  [16] = {.lex_state = 9},
-  [17] = {.lex_state = 11},
-  [18] = {.lex_state = 11},
-  [19] = {.lex_state = 11},
-  [20] = {.lex_state = 11},
-  [21] = {.lex_state = 11},
-  [22] = {.lex_state = 11},
-  [23] = {.lex_state = 11},
-  [24] = {.lex_state = 11},
-  [25] = {.lex_state = 11},
-  [26] = {.lex_state = 11},
-  [27] = {.lex_state = 11},
+  [1] = {.lex_state = 10},
+  [2] = {.lex_state = 10},
+  [3] = {.lex_state = 10},
+  [4] = {.lex_state = 11},
+  [5] = {.lex_state = 11},
+  [6] = {.lex_state = 11},
+  [7] = {.lex_state = 12},
+  [8] = {.lex_state = 12},
+  [9] = {.lex_state = 12},
+  [10] = {.lex_state = 12},
+  [11] = {.lex_state = 12},
+  [12] = {.lex_state = 10},
+  [13] = {.lex_state = 10},
+  [14] = {.lex_state = 10},
+  [15] = {.lex_state = 10},
+  [16] = {.lex_state = 10},
+  [17] = {.lex_state = 12},
+  [18] = {.lex_state = 12},
+  [19] = {.lex_state = 12},
+  [20] = {.lex_state = 12},
+  [21] = {.lex_state = 12},
+  [22] = {.lex_state = 12},
+  [23] = {.lex_state = 12},
+  [24] = {.lex_state = 12},
+  [25] = {.lex_state = 12},
+  [26] = {.lex_state = 12},
+  [27] = {.lex_state = 12},
   [28] = {.lex_state = 2},
   [29] = {.lex_state = 2},
   [30] = {.lex_state = 2},
   [31] = {.lex_state = 2},
-  [32] = {.lex_state = 3},
-  [33] = {.lex_state = 12},
-  [34] = {.lex_state = 12},
-  [35] = {.lex_state = 12},
-  [36] = {.lex_state = 3},
-  [37] = {.lex_state = 12},
-  [38] = {.lex_state = 12},
-  [39] = {.lex_state = 3},
-  [40] = {.lex_state = 3},
+  [32] = {.lex_state = 4},
+  [33] = {.lex_state = 13},
+  [34] = {.lex_state = 13},
+  [35] = {.lex_state = 13},
+  [36] = {.lex_state = 4},
+  [37] = {.lex_state = 13},
+  [38] = {.lex_state = 13},
+  [39] = {.lex_state = 4},
+  [40] = {.lex_state = 4},
   [41] = {.lex_state = 0},
   [42] = {.lex_state = 0},
   [43] = {.lex_state = 0},
@@ -685,11 +695,11 @@ static const TSLexerMode ts_lex_modes[STATE_COUNT] = {
   [45] = {.lex_state = 0},
   [46] = {.lex_state = 0},
   [47] = {.lex_state = 0},
-  [48] = {.lex_state = 12},
-  [49] = {.lex_state = 12},
-  [50] = {.lex_state = 12},
-  [51] = {.lex_state = 12},
-  [52] = {.lex_state = 12},
+  [48] = {.lex_state = 13},
+  [49] = {.lex_state = 13},
+  [50] = {.lex_state = 13},
+  [51] = {.lex_state = 13},
+  [52] = {.lex_state = 13},
   [53] = {.lex_state = 0},
   [54] = {.lex_state = 0},
   [55] = {.lex_state = 0},

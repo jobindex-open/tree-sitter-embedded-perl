@@ -84,7 +84,7 @@ module.exports = grammar({
 
     escaped_open_tag: _ => "<%%",
 
-    tag_content: _ => token(prec(1, /([^%]|%[^>])+/)),
+    tag_content: _ => token(prec(1, /([^%=]|=[^%]|=%[^>]|%[^>])+/)),
 
     tag_close: _ => seq(optional("="), "%>"),
 

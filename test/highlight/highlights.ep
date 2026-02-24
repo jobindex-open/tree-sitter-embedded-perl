@@ -20,8 +20,8 @@
 
 <%= expr =%>
 %#<- @keyword.directive
-%# ^^^^^^^ @embedded
-%#        ^^ @keyword.directive
+%# ^^^^^^ @embedded
+%#       ^^^ @keyword.directive
 
 % my $x;
 %#<- @keyword.directive

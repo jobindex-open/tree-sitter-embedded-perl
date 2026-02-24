@@ -25,4 +25,4 @@
 (escaped_open_tag) @escape
 
 (tag_close "%>" @keyword.directive)
-(tag_close "=" @operator "%>" @keyword.directive)
+(tag_close "=" @keyword.directive "%>" @keyword.directive)
