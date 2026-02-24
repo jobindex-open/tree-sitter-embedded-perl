@@ -11,7 +11,9 @@
         "html.ep"
       ],
       "injection-regex": "^embedded_perl$",
-      "class-name": "TreeSitterEmbeddedPerl"
+      "class-name": "TreeSitterEmbeddedPerl",
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm"
     }
   ],
   "metadata": {
