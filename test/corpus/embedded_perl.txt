@@ -1,0 +1,208 @@
+==================
+tags and text
+==================
+<% my $i = 10; %>
+<ul>
+  <% for my $j (1 .. $i) { %>
+    <li><%= $j %></li>
+  <% } %>
+</ul>
+<%== '<p>I ♥ Mojolicious!</p>' %>
+<%# Debug only %>
+<%%
+% my $sub = begin
+content
+% end
+
+---
+
+(source_file
+  (content_line
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (content_line
+    (line_indent)
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (tag
+      (expression_tag
+        (tag_content)
+        (tag_close)))
+    (non_directive_text)
+    (newline))
+  (content_line
+    (line_indent)
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (content_line
+    (tag
+      (raw_expression_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (tag
+      (comment_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (escaped_open_tag)
+    (newline))
+  (directive_line
+    (line_statement
+      (line_code
+        (line_content)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (directive_line
+    (line_statement
+      (line_code
+        (line_content)))
+    (newline)))
+
+==================
+line directives
+==================
+% my $i = 3;
+<ul>
+  % for my $j (1 .. $i) {
+    <li>
+      %= $j
+    </li>
+  % }
+</ul>
+%% this line starts with a literal percent sign
+%# comment line
+%== '<strong>raw line</strong>'
+
+---
+
+(source_file
+  (directive_line
+    (line_statement
+      (line_code
+        (line_content)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (directive_line
+    (line_indent)
+    (line_statement
+      (line_code
+        (line_content)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (directive_line
+    (line_indent)
+    (line_statement
+      (line_expression
+        (line_content)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (directive_line
+    (line_indent)
+    (line_statement
+      (line_code
+        (line_content)))
+    (newline))
+  (content_line
+    (non_directive_text)
+    (newline))
+  (directive_line
+    (line_statement
+      (line_escaped_percent
+        (line_content)))
+    (newline))
+  (directive_line
+    (line_statement
+      (line_comment
+        (line_content)))
+    (newline))
+  (directive_line
+    (line_statement
+      (line_raw_expression
+        (line_content)))
+    (newline)))
+
+==================
+trimmed tag endings
+==================
+<% for (1 .. 2) { %>
+  <%= 'trimmed output' =%>
+<% } =%>
+
+---
+
+(source_file
+  (content_line
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (line_indent)
+    (tag
+      (expression_tag
+        (tag_content)
+        (tag_close)))
+    (newline))
+  (content_line
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (newline)))
+
+==================
+inline percent characters
+==================
+foo%bar
+
+---
+
+(source_file
+  (content_line
+    (non_directive_text)
+    (newline)))
+
+==================
+trailing close tag text
+==================
+<% $x %>foo
+
+---
+
+(source_file
+  (content_line
+    (tag
+      (code_tag
+        (tag_content)
+        (tag_close)))
+    (non_directive_text)
+    (newline)))
