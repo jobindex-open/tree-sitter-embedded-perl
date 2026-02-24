@@ -1,0 +1,50 @@
+<% my $x; %>
+%#<- @keyword.directive
+%#^^^^^^^^ @embedded
+%#        ^^ @keyword.directive
+
+<%= $x %>
+%#<- @keyword.directive
+%# ^^^^ @embedded
+%#     ^^ @keyword.directive
+
+<%== $x %>
+%#<- @keyword.directive
+%#  ^^^^ @embedded
+%#      ^^ @keyword.directive
+
+<%# comment %>
+%#<- @keyword.directive
+%# ^^^^^^^^^ @embedded
+%#           ^^ @keyword.directive
+
+<%= expr =%>
+%#<- @keyword.directive
+%# ^^^^^^^ @embedded
+%#        ^^ @keyword.directive
+
+% my $x;
+%#<- @keyword.directive
+%#^^^^^^ @embedded
+
+%= $x
+%#<- @keyword.directive
+%# ^^^ @embedded
+
+%== $x
+%#<- @keyword.directive
+%#  ^^^ @embedded
+
+%# a comment
+%#<- @keyword.directive
+%#^^^^^^^^^^ @embedded
+
+%% text
+%#<- @escape
+%#^^^^^ @embedded
+
+<%%
+%#<- @escape
+
+foo<%%bar
+%# ^^^ @escape
