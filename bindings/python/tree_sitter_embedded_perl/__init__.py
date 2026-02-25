@@ -1,4 +1,4 @@
-"""Embedded Perl templates as used by Mojolicious"""
+"""Embedded Perl grammar for tree-sitter"""
 
 from importlib.resources import files as _files
 

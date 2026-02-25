@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-embedded-perl
         VERSION "0.1.0"
-        DESCRIPTION "Embedded Perl templates as used by Mojolicious"
+        DESCRIPTION "Embedded Perl grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/jobindex-open/tree-sitter-embedded-perl"
         LANGUAGES C)
 

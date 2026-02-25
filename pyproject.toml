@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-embedded-perl"
-description = "Embedded Perl templates as used by Mojolicious"
+description = "Embedded Perl grammar for tree-sitter"
 version = "0.1.0"
 keywords = ["incremental", "parsing", "tree-sitter", "embedded-perl"]
 classifiers = [

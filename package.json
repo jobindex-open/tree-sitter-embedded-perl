@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-embedded-perl",
   "version": "0.1.0",
-  "description": "Embedded Perl templates as used by Mojolicious",
+  "description": "Embedded Perl grammar for tree-sitter",
   "repository": "https://github.com/jobindex-open/tree-sitter-embedded-perl",
   "license": "MIT",
   "author": {
