@@ -2,7 +2,7 @@
 ([
   (comment_tag)
   (line_comment)
-] @comment)
+] @comment (#set! priority 105))
 
 ; Embedded Perl content
 [
